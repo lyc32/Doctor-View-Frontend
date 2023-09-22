@@ -17,13 +17,15 @@
               <div class="col-sm-12 border-bottom">
                 <a class="col-form-label h3" href="myAccount/password">Reset Password</a>
               </div>
-
-              <div class="col-sm-12 border-bottom" *ngIf="user.id != -1 && user.type != 'PERSON' && user.type != 'ADMIN'">
+              <div class="col-sm-12 border-bottom" *ngIf="user.id != -1 && user.type == 'DOCTOR'">
+                <a class="col-form-label h3" href="myAccount/appointmentFee">My Appointment Fee</a>
+              </div>
+              <div class="col-sm-12 border-bottom" *ngIf="user.id != -1 && user.type == 'DOCTOR'">
                 <a class="col-form-label h3" href="myAccount/workExperience">Work Experience</a>
               </div>
               <div class="col-sm-12">
               </div>
-              <div class="col-sm-12 border-bottom" *ngIf="user.id != -1 && user.type != 'PERSON' && user.type != 'ADMIN'">
+              <div class="col-sm-12 border-bottom" *ngIf="user.id != -1 && user.type == 'DOCTOR'">
                 <a class="col-form-label h3" href="myAccount/appointments">Appointments</a>
               </div>
 
@@ -85,6 +87,16 @@
                 </div>
                 <div class="col-sm-8">
                   <label class="col-form-label"><h5>{{user.emailId}}</h5></label>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="row pt-2 pb-2">
+                <div class="col-sm-4 text-end">
+                  <label class="col-form-label">Appointment Fee:</label>
+                </div>
+                <div class="col-sm-8">
+                  <label class="col-form-label"><h5>{{'$' + doctorAppointmentFee}}</h5></label>
                 </div>
               </div>
             </div>
@@ -214,8 +226,46 @@
           </div>
         </div>
 
+        <!-- Update Appointment Fee -->
+        <div *ngIf="type=='appointmentFee' && user.id != -1 && user.type == 'DOCTOR'">
+          <h3 class="card-title text-center pt-3">Update Your Appointment Fee</h3>
+          <hr class="text-secondary">
+          <div class="row g-3">
+            <form id="updatePhoneForm">
+              <input type="hidden" name="user_id" id="user_id" value="{{user.id}}">
+              <div class="row pt-4 pb-4">
+                <div class="col-sm-12">
+                  <div class="row pb-4">
+                    <div class="col-sm-4 text-end">
+                      <label class="col-form-label">Your Current Appointment Fee:</label>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" value="{{'$' + doctorAppointmentFee}}" readonly>
+                    </div>
+                  </div>
+                  <div class="row pb-4">
+                    <div class="col-sm-4 text-end">
+                      <label class="col-form-label">New Appointment Fee:</label>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name="appointmentFee" id="appointmentFee" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="row pt-4">
+              <div class="col-sm-11 text-end">
+                <button class="btn btn-primary mb-3 btn-lg py-1 px-5 ms-4" (click)="updateAppointmentFee()">update</button>
+              </div>
+              <div class="col-sm-12" id="errorMessage">
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Update Work Experience -->
-        <div *ngIf="type=='workExperience' && user.id != -1" >
+        <div *ngIf="type=='workExperience' && user.id != -1 && user.type == 'DOCTOR'" >
           <h3 class="card-title text-center pt-3">My Work Experience</h3>
           <hr class="text-secondary">
           <div class="col-sm-12 ms-2">

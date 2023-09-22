@@ -12,5 +12,5 @@ export class Account
   details:string = ''; // json string: doctor's work experience, CV ?
   type:string = ''; // account type: user, doctor, admin
   subtype:string = '';
-  
+
 }

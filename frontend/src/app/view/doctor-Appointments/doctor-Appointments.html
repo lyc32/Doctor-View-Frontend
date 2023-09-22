@@ -1,81 +1,142 @@
 <div class="container mt-4 mb-4" style="min-height: 700px;">
-  <div class="row justify-content-center">
-    <div class="card" style="max-width: 600px;">
-      <div class="row g-0">
-        <div class="card-body">
-          <h3 class="card-title text-center border-bottom  pb-4">{{today}}</h3>
+  <div class="row">
+    <div class="col-sm-3">
+
+      <div class="card outer-container justify-content-center">
+        <div class="inner-container">
+          <div class="clock-center"></div>
+          <div class="time-container text-secondary">{{now|date:'hh:mm:ss'}}</div>
+          <div class="scale  left-scale"></div>
+          <div class="scale  top-scale"></div>
+          <div class="scale  right-scale"></div>
+          <div class="scale  bottom-scale"></div>
+          <div class="hour-scale one-scale"></div>
+          <div class="hour-scale two-scale"></div>
+          <div class="hour-scale four-scale"></div>
+          <div class="hour-scale five-scale"></div>
+          <div class="hour-scale seven-scale"></div>
+          <div class="hour-scale eight-scale"></div>
+          <div class="hour-scale ten-scale"></div>
+          <div class="hour-scale eleven-scale"></div>
+          <div class="pointer hour-pointer"></div>
+          <div class="pointer minute-pointer"></div>
+          <div class="pointer second-pointer"></div>
         </div>
       </div>
-      <div class="row g-0">
-        <div class="card-body">
-          <h4 class="card-title text-start border-bottom  pb-4">7:00 am </h4>
+      <br>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="month">
+            <ul>
+              <li class="prev">❮</li>
+              <li class="next">❯</li>
+              <li style="text-align:center">{{mouth}}<br>
+                <span style="font-size:18px">{{year}}</span>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="row g-0">
-        <div class="card-body">
-          <h4 class="card-title text-start border-bottom  pb-4">8:00 am </h4>
-        </div>
-      </div>
-      <div class="row g-0">
-        <div class="card-body">
-          <h4 class="card-title text-start border-bottom  pb-4">9:00 am </h4>
-        </div>
-      </div>
-      <div class="row g-0">
-        <div class="card-body">
-          <h4 class="card-title text-start border-bottom  pb-4">10:00 am </h4>
-        </div>
-      </div>
-      <div class="row g-0">
-        <div class="card-body">
-          <h4 class="card-title text-start border-bottom  pb-4">11:00 am </h4>
-        </div>
-      </div>
-      <div class="row g-0">
-        <div class="card-body">
-          <hr class="text-danger">
-        </div>
+        <ul class="weekdays">
+          <li>Su</li>
+          <li>Mo</li>
+          <li>Tu</li>
+          <li>We</li>
+          <li>Th</li>
+          <li>Fr</li>
+          <li>Sa</li>
+        </ul>
+        <ul class="days" >
+          <li *ngFor="let i of days" >
+            <span *ngIf="i == date" class="active">{{i}}</span>
+            <span *ngIf="i != date" >{{i}}</span>
+          </li>
+        </ul>
       </div>
 
-      <div class="row g-0">
-        <div class="card-body">
-          <h4 class="card-title text-start border-bottom  pb-4">1:00 pm </h4>
+
+    </div>
+    <div class="col-sm-5">
+      <div class="card" style="max-width: 600px;">
+
+        <div class="row g-0">
+          <div class="card-body">
+            <h6 class="card-title text-start border-bottom  pb-4">7:00 am </h6>
+          </div>
+        </div>
+
+        <div class="row g-0">
+          <div class="card-body">
+            <h5 class="card-title text-start border-bottom  pb-4">8:00 am </h5>
+          </div>
+        </div>
+        <div class="row g-0">
+          <div class="card-body">
+            <h5 class="card-title text-start border-bottom  pb-4">9:00 am </h5>
+          </div>
+        </div>
+        <div class="row g-0">
+          <div class="card-body">
+            <h5 class="card-title text-start border-bottom  pb-4">10:00 am </h5>
+          </div>
+        </div>
+        <div class="row g-0">
+          <div class="card-body">
+            <h5 class="card-title text-start border-bottom  pb-4">11:00 am </h5>
+          </div>
+        </div>
+        <div class="row g-0">
+          <div class="card-body">
+            <hr class="text-danger">
+          </div>
+        </div>
+
+        <div class="row g-0">
+          <div class="card-body">
+            <h5 class="card-title text-start border-bottom  pb-4">1:00 pm </h5>
+          </div>
+        </div>
+
+        <div class="row g-0">
+          <div class="card-body">
+            <h5 class="card-title text-start border-bottom  pb-4">2:00 pm </h5>
+          </div>
+        </div>
+
+        <div class="row g-0">
+          <div class="card-body">
+            <h5 class="card-title text-start border-bottom  pb-4">3:00 pm </h5>
+          </div>
+        </div>
+
+        <div class="row g-0">
+          <div class="card-body">
+            <h5 class="card-title text-start border-bottom  pb-4">4:00 pm </h5>
+          </div>
+        </div>
+
+        <div class="row g-0">
+          <div class="card-body">
+            <h5 class="card-title text-start border-bottom  pb-4">5:00 pm </h5>
+          </div>
+        </div>
+
+        <div class="row g-0">
+          <div class="card-body">
+            <h5 class="card-title text-start border-bottom  pb-4">6:00 pm </h5>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="row g-0">
-        <div class="card-body">
-          <h4 class="card-title text-start border-bottom  pb-4">2:00 pm </h4>
-        </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <h1>Appointment Details</h1>
       </div>
-
-      <div class="row g-0">
-        <div class="card-body">
-          <h4 class="card-title text-start border-bottom  pb-4">3:00 pm </h4>
-        </div>
-      </div>
-
-      <div class="row g-0">
-        <div class="card-body">
-          <h4 class="card-title text-start border-bottom  pb-4">4:00 pm </h4>
-        </div>
-      </div>
-
-      <div class="row g-0">
-        <div class="card-body">
-          <h4 class="card-title text-start border-bottom  pb-4">5:00 pm </h4>
-        </div>
-      </div>
-
-      <div class="row g-0">
-        <div class="card-body">
-          <h4 class="card-title text-start border-bottom  pb-4">6:00 pm </h4>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
+
 
 
 

@@ -16,6 +16,7 @@ export class AccountInfoComponent implements OnInit
   type:string = "info";
   user:Account = new Account();
 
+  doctorAppointmentFee = 0;
   doctorIntroduce:string = '';
   doctorWorkExperiencesList: WorkExperience[] = [];
 
@@ -32,15 +33,15 @@ export class AccountInfoComponent implements OnInit
     {
       // @ts-ignore
       this.user = JSON.parse(window.sessionStorage.getItem('healthCenterUser'));
-      //this.doctorIntroduce = (JSON.parse(atob(this.user.details)) as DoctorDetail).introduce;
-      //this.doctorWorkExperiencesList = (JSON.parse(atob(this.user.details)) as DoctorDetail).workExperiences;
+      this.doctorAppointmentFee = (JSON.parse(atob(this.user.details)) as DoctorDetail).appointmentFee;
+      this.doctorIntroduce = (JSON.parse(atob(this.user.details)) as DoctorDetail).introduce;
+      this.doctorWorkExperiencesList = (JSON.parse(atob(this.user.details)) as DoctorDetail).workExperiences;
     }
     else
     {
       this.user = new Account();
     }
   }
-
 
   updatePhoneNumber()
   {
@@ -53,6 +54,11 @@ export class AccountInfoComponent implements OnInit
   }
 
   resetPassword()
+  {
+
+  }
+
+  updateAppointmentFee()
   {
 
   }
