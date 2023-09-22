@@ -9,7 +9,7 @@ import {AccountInfoComponent} from "./view/account-info/account-info.component";
 const routes: Routes = [
   {path:"logIn"                 , component:LoginComponent},
   {path:"signIn"                , component:SigninComponent},
-  {path:"Doctor/Home"           , component:DoctorAppointments},
+  {path:"doctor/appointment/:date", component:DoctorAppointments},
   {path:"myAccount/:type" , component:AccountInfoComponent},
   {path:"myAccount/appointments/:date" , component:AccountInfoComponent},
   {path:"message/:message"      , component:MessageComponent}

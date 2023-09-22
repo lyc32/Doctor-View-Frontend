@@ -5,7 +5,7 @@
       <div class="card outer-container justify-content-center">
         <div class="inner-container">
           <div class="clock-center"></div>
-          <div class="time-container text-secondary">{{now|date:'hh:mm:ss'}}</div>
+          <div class="time-container text-secondary">{{currentTime|date:'hh:mm:ss'}}</div>
           <div class="scale  left-scale"></div>
           <div class="scale  top-scale"></div>
           <div class="scale  right-scale"></div>
@@ -29,8 +29,12 @@
         <div class="card-title">
           <div class="month">
             <ul>
-              <li class="prev">❮</li>
-              <li class="next">❯</li>
+              <li class="prev">
+                <a class="a text-white" href="{{prev}}">❮</a>
+              </li>
+              <li class="next">
+                <a class="a text-white" href="{{next}}">❯</a>
+              </li>
               <li style="text-align:center">{{mouth}}<br>
                 <span style="font-size:18px">{{year}}</span>
               </li>
@@ -47,9 +51,14 @@
           <li>Sa</li>
         </ul>
         <ul class="days" >
+          <li *ngFor="let i of emptyDays" >
+            <span>{{i}}</span>
+          </li>
           <li *ngFor="let i of days" >
-            <span *ngIf="i == date" class="active">{{i}}</span>
-            <span *ngIf="i != date" >{{i}}</span>
+              <span *ngIf="i == date" class="active">{{i}}</span>
+              <span *ngIf="i != date" >
+                <a class="a text-secondary" href="/doctor/appointment/{{year*10000+mouthIndex*100+i}}">{{i}}</a>
+              </span>
           </li>
         </ul>
       </div>
@@ -67,22 +76,22 @@
 
         <div class="row g-0">
           <div class="card-body">
-            <h5 class="card-title text-start border-bottom  pb-4">8:00 am </h5>
+            <h6 class="card-title text-start border-bottom  pb-4">8:00 am </h6>
           </div>
         </div>
         <div class="row g-0">
           <div class="card-body">
-            <h5 class="card-title text-start border-bottom  pb-4">9:00 am </h5>
+            <h6 class="card-title text-start border-bottom  pb-4">9:00 am </h6>
           </div>
         </div>
         <div class="row g-0">
           <div class="card-body">
-            <h5 class="card-title text-start border-bottom  pb-4">10:00 am </h5>
+            <h6 class="card-title text-start border-bottom  pb-4">10:00 am </h6>
           </div>
         </div>
         <div class="row g-0">
           <div class="card-body">
-            <h5 class="card-title text-start border-bottom  pb-4">11:00 am </h5>
+            <h6 class="card-title text-start border-bottom  pb-4">11:00 am </h6>
           </div>
         </div>
         <div class="row g-0">
@@ -93,37 +102,37 @@
 
         <div class="row g-0">
           <div class="card-body">
-            <h5 class="card-title text-start border-bottom  pb-4">1:00 pm </h5>
+            <h6 class="card-title text-start border-bottom  pb-4">1:00 pm </h6>
           </div>
         </div>
 
         <div class="row g-0">
           <div class="card-body">
-            <h5 class="card-title text-start border-bottom  pb-4">2:00 pm </h5>
+            <h6 class="card-title text-start border-bottom  pb-4">2:00 pm </h6>
           </div>
         </div>
 
         <div class="row g-0">
           <div class="card-body">
-            <h5 class="card-title text-start border-bottom  pb-4">3:00 pm </h5>
+            <h6 class="card-title text-start border-bottom  pb-4">3:00 pm </h6>
           </div>
         </div>
 
         <div class="row g-0">
           <div class="card-body">
-            <h5 class="card-title text-start border-bottom  pb-4">4:00 pm </h5>
+            <h6 class="card-title text-start border-bottom  pb-4">4:00 pm </h6>
           </div>
         </div>
 
         <div class="row g-0">
           <div class="card-body">
-            <h5 class="card-title text-start border-bottom  pb-4">5:00 pm </h5>
+            <h6 class="card-title text-start border-bottom  pb-4">5:00 pm </h6>
           </div>
         </div>
 
         <div class="row g-0">
           <div class="card-body">
-            <h5 class="card-title text-start border-bottom  pb-4">6:00 pm </h5>
+            <h6 class="card-title text-start border-bottom  pb-4">6:00 pm </h6>
           </div>
         </div>
       </div>

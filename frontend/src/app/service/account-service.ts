@@ -24,6 +24,7 @@ export class AccountService
     const params = new HttpParams({
       fromObject: info
     });
+    console.log(params);
     return this.httpClient.post<Account>(this.baseURL +'login', params);
   }
 
