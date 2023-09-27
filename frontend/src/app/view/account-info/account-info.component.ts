@@ -148,12 +148,62 @@ export class AccountInfoComponent implements OnInit
 
   updateAppointmentFee()
   {
+    let newDoctorDetail = new DoctorDetail();
+    let id = this.user.id;
+    let appointmentFee = (document.getElementById("appointmentFee") as HTMLInputElement).value;
+    if (appointmentFee == '')
+    {
+      // @ts-ignore
+      document.getElementById("errorMessage").innerHTML = '<div class="alert alert-danger">Appointment Fee Is Empty</div>';
+    }
+    else
+    {
+      newDoctorDetail.appointmentFee = Number(appointmentFee);
+      newDoctorDetail.introduce = this.doctorIntroduce;
+      newDoctorDetail.workExperiences = this.doctorWorkExperiencesList;
 
+      this.accountService.updateDetails(id, btoa(JSON.stringify(newDoctorDetail))).subscribe(
+        (data)=>
+        {
+          window.sessionStorage.setItem("healthCenterUser", JSON.stringify(data));
+          window.location.href = "message/updateSuccessful";
+        },
+        error =>
+        {
+          window.location.href = "message/updateFailed";
+        }
+      );
+    }
   }
 
   updateWorkExperience()
   {
+    let newDoctorDetail = new DoctorDetail();
+    let id = this.user.id;
+    let introduce = (document.getElementById("introduce") as HTMLTextAreaElement).value;
+    if (introduce == '')
+    {
+      // @ts-ignore
+      document.getElementById("errorMessage").innerHTML = '<div class="alert alert-danger">Resume Is Empty</div>';
+    }
+    else
+    {
+      newDoctorDetail.appointmentFee = this.doctorAppointmentFee;
+      newDoctorDetail.introduce = introduce;
+      newDoctorDetail.workExperiences = this.doctorWorkExperiencesList;
 
+      this.accountService.updateDetails(id, btoa(JSON.stringify(newDoctorDetail))).subscribe(
+        (data)=>
+        {
+          window.sessionStorage.setItem("healthCenterUser", JSON.stringify(data));
+          window.location.href = "message/updateSuccessful";
+        },
+        error =>
+        {
+          window.location.href = "message/updateFailed";
+        }
+      );
+    }
   }
 
   showAddExperienceFrom()

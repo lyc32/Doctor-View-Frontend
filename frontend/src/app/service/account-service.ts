@@ -59,5 +59,15 @@ export class AccountService
     return this.httpClient.put<Account>( this.baseURL + id, JSON.stringify(info), {headers: httpHeaders });
   }
 
+  updateDetails(id:number, details:string):Observable<Account>
+  {
+    const httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    const info = {
+      id: id,
+      details: details
+    }
+    return this.httpClient.put<Account>( this.baseURL + id, JSON.stringify(info), {headers: httpHeaders });
+  }
+
 
 }
