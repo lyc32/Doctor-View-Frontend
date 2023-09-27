@@ -48,26 +48,29 @@ public class AccountController {
 	
 	
 	@GetMapping("/accounts/{id}")
-	public ResponseEntity<Account> getaccountById(@PathVariable Long id)
-	{
+	public ResponseEntity<Account> getaccountById(@PathVariable Long id) {
 		Account account = accountRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("account not exist with id :" + id));
 		return ResponseEntity.ok(account);
 	}
-
+	
+	 
+	
 	@PutMapping("/accounts/{id}")
 	public ResponseEntity<Account> updateaccount(@PathVariable Long id, @RequestBody Account accountDetails){
 		Account account = accountRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("account not exist with id :" + id));
 		
-		account.setFirstName(accountDetails.getFirstName());
-		account.setLastName(accountDetails.getLastName());
-		account.setEmailId(accountDetails.getEmailId());
+		//account.setFirstName(accountDetails.getFirstName());
+		//account.setLastName(accountDetails.getLastName());
+		//account.setEmailId(accountDetails.getEmailId());
+		account.merge(accountDetails);
 		
 		Account updatedaccount = accountRepository.save(account);
 		return ResponseEntity.ok(updatedaccount);
 	}
-
+	
+	
 	@DeleteMapping("/accounts/{id}")
 	public String deleteaccount(@PathVariable Long id){
 		Account account = accountRepository.findById(id)
@@ -76,10 +79,6 @@ public class AccountController {
 		accountRepository.delete(account);
 		return "deleted";
 	}
-
-
-
-
 
 	@PostMapping("/accounts/login")
 	public ResponseEntity<Account> login(String email, String password)
@@ -95,8 +94,8 @@ public class AccountController {
 		{
 			return ResponseEntity.ok(accountList.get(0));
 		}
-
 	}
-	
+
+
 	
 }

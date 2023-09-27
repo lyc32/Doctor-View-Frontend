@@ -14,86 +14,108 @@ public class Appointment {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-	private int id;
+	private Long id;
 	@Column(name = "doctor_id")
-	private int doctor_id;
+	private Long doctorId;
 	@Column(name = "doctor_name")
 	private String doctor_name;
 	@Column(name = "person_id")
-	private int person_id;
+	private Long personId;
 	@Column(name = "person_name")
 	private String person_name;
 	@Column(name = "fee")
-	private int fee;
-	@Column(name="appointment_date")
+	private Long fee;
+	@Column(name="date")
 	private String date;
-	@Column(name = "appointment_time")
-	private int time;
-	public Appointment(int id, int doctor_id, String doctor_name, int person_id, String person_name, int fee,
-			String date,int time) {
-		super();
+	@Column(name = "time")
+	private Long time;
+	@Column(name = "details")
+	private String details;
+
+	public Appointment() {
+	}
+
+	public Appointment(Long id, Long doctorId, String doctor_name, Long personId, String person_name, Long fee, String date, Long time, String details) {
 		this.id = id;
-		this.doctor_id = doctor_id;
+		this.doctorId = doctorId;
 		this.doctor_name = doctor_name;
-		this.person_id = person_id;
+		this.personId = personId;
 		this.person_name = person_name;
 		this.fee = fee;
-		this.date=date;
+		this.date = date;
 		this.time = time;
+		this.details = details;
 	}
-	public Appointment() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public int getId() {
+
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getDoctor_id() {
-		return doctor_id;
+
+	public Long getDoctorId() {
+		return doctorId;
 	}
-	public void setDoctor_id(int doctor_id) {
-		this.doctor_id = doctor_id;
+
+	public void setDoctorId(Long doctorId) {
+		this.doctorId = doctorId;
 	}
+
 	public String getDoctor_name() {
 		return doctor_name;
 	}
+
 	public void setDoctor_name(String doctor_name) {
 		this.doctor_name = doctor_name;
 	}
-	public int getPerson_id() {
-		return person_id;
+
+	public Long getPersonId() {
+		return personId;
 	}
-	public void setPerson_id(int person_id) {
-		this.person_id = person_id;
+
+	public void setPersonId(Long personId) {
+		this.personId = personId;
 	}
+
 	public String getPerson_name() {
 		return person_name;
 	}
+
 	public void setPerson_name(String person_name) {
 		this.person_name = person_name;
 	}
-	public int getFee() {
+
+	public Long getFee() {
 		return fee;
 	}
-	public void setFee(int fee) {
+
+	public void setFee(Long fee) {
 		this.fee = fee;
 	}
-	public int getTime() {
-		return time;
-	}
-	public void setTime(int time) {
-		this.time = time;
-	}
+
 	public String getDate() {
 		return date;
 	}
+
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
-	
 
+	public Long getTime() {
+		return time;
+	}
+
+	public void setTime(Long time) {
+		this.time = time;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
 }

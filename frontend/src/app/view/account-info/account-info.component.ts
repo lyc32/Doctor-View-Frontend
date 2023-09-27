@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Account } from 'src/app/model/account';
 import {WorkExperience} from "../../model/work-experience";
 import {DoctorDetail} from "../../model/doctor-detail";
+import {AccountService} from "../../service/account-service";
 
 @Component({
   selector: 'app-doctor-info',
@@ -20,7 +21,7 @@ export class AccountInfoComponent implements OnInit
   doctorIntroduce:string = '';
   doctorWorkExperiencesList: WorkExperience[] = [];
 
-  constructor(private router:ActivatedRoute)
+  constructor(private router:ActivatedRoute, private accountService:AccountService)
   {
   }
 
@@ -45,17 +46,104 @@ export class AccountInfoComponent implements OnInit
 
   updatePhoneNumber()
   {
-
+    let id = this.user.id;
+    let phone = (document.getElementById("phone") as HTMLInputElement).value;
+    if (phone == '')
+    {
+      // @ts-ignore
+      document.getElementById("errorMessage").innerHTML = '<div class="alert alert-danger">Phone Number Is Empty</div>';
+    }
+    else if(phone == this.user.phone)
+    {
+      // @ts-ignore
+      document.getElementById("errorMessage").innerHTML = '<div class="alert alert-danger">Please Enter A New Number</div>';
+    }
+    else
+    {
+      this.accountService.updatePhone(id, phone).subscribe(
+        (data)=>
+        {
+          window.sessionStorage.setItem("healthCenterUser", JSON.stringify(data));
+          window.location.href = "message/updateSuccessful";
+        },
+        error =>
+        {
+          window.location.href = "message/updateFailed";
+        }
+      );
+    }
   }
 
   updateEmail()
   {
-
+    let id = this.user.id;
+    let email = (document.getElementById("email") as HTMLInputElement).value;
+    if (email == '')
+    {
+      // @ts-ignore
+      document.getElementById("errorMessage").innerHTML = '<div class="alert alert-danger">E-mail Is Empty</div>';
+    }
+    else if(email == this.user.phone)
+    {
+      // @ts-ignore
+      document.getElementById("errorMessage").innerHTML = '<div class="alert alert-danger">Please Enter A New E-mail</div>';
+    }
+    else
+    {
+      this.accountService.updateEmail(id, email).subscribe(
+        (data)=>
+        {
+          window.sessionStorage.setItem("healthCenterUser", JSON.stringify(data));
+          window.location.href = "message/updateSuccessful";
+        },
+        error =>
+        {
+          window.location.href = "message/updateFailed";
+        }
+      );
+    }
   }
 
   resetPassword()
   {
-
+    let id = this.user.id;
+    let password = (document.getElementById("password") as HTMLInputElement).value;
+    let confirm = (document.getElementById("confirm") as HTMLInputElement).value;
+    let oldPassword = (document.getElementById("oldPassword") as HTMLInputElement).value;
+    if (password == '')
+    {
+      // @ts-ignore
+      document.getElementById("errorMessage").innerHTML = '<div class="alert alert-danger"> Password Is Empty</div>';
+    }
+    else if(password == this.user.password)
+    {
+      // @ts-ignore
+      document.getElementById("errorMessage").innerHTML = '<div class="alert alert-danger">Please Enter A New Password</div>';
+    }
+    else if(oldPassword != this.user.password)
+    {
+      // @ts-ignore
+      document.getElementById("errorMessage").innerHTML = '<div class="alert alert-danger">You Original PassWord Is Incorrect</div>';
+    }
+    else if(password != confirm)
+    {
+      // @ts-ignore
+      document.getElementById("errorMessage").innerHTML = '<div class="alert alert-danger">PassWord and Confirm Password not Match</div>';
+    }
+    else
+    {
+      this.accountService.resetPassword(id, password).subscribe(
+        (data)=>
+        {
+          window.sessionStorage.setItem("healthCenterUser", JSON.stringify(data));
+          window.location.href = "message/updateSuccessful";
+        },
+        error =>
+        {
+          window.location.href = "message/updateFailed";
+        }
+      );
+    }
   }
 
   updateAppointmentFee()

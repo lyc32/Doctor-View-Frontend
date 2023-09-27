@@ -17,6 +17,7 @@
               <div class="col-sm-12 border-bottom">
                 <a class="col-form-label h3" href="myAccount/password">Reset Password</a>
               </div>
+
               <div class="col-sm-12 border-bottom" *ngIf="user.id != -1 && user.type == 'DOCTOR'">
                 <a class="col-form-label h3" href="myAccount/appointmentFee">My Appointment Fee</a>
               </div>
@@ -25,21 +26,7 @@
               </div>
               <div class="col-sm-12">
               </div>
-              <div class="col-sm-12 border-bottom" *ngIf="user.id != -1 && user.type == 'DOCTOR'">
-                <a class="col-form-label h3" href="myAccount/appointments">Appointments</a>
-              </div>
 
-              <div class="col-sm-12">
-              </div>
-              <div class="col-sm-12 border-bottom" *ngIf="user.id != -1 && user.type == 'ADMIN'">
-                <a class="col-form-label h3 text-danger" href="admin/myAccount/userList">User List</a>
-              </div>
-              <div class="col-sm-12 border-bottom" *ngIf="user.id != -1 && user.type == 'ADMIN'">
-                <a class="col-form-label h3 text-danger" href="admin/myAccount/DoctorList">Doctor List</a>
-              </div>
-              <div class="col-sm-12 border-bottom" *ngIf="user.id != -1 && user.type == 'ADMIN'">
-                <a class="col-form-label h3 text-danger" href="admin/myAccount/appointments">Order List</a>
-              </div>
             </div>
           </div>
         </div>
@@ -342,39 +329,6 @@
           </div>
         </div>
 
-        <!-- Show Appointment  -->
-
-
-        <div *ngIf="type=='userList' && user.id != -1 && user.type == 'ADMIN'">
-          <h3 class="card-title text-center p-4">User List</h3>
-          <div class="row g-3">
-            <div class="card-body" style="min-height: 400px;">
-              <div class="table-responsive">
-                <table class="table table-sm table-hover table-success">
-                  <thead class="thead-dark">
-                  <tr>
-                    <th scope="col-sm-1"><h5>#</h5></th>
-                    <th scope="col-sm-3"><h5>UserName</h5></th>
-                    <th scope="col-sm-4"><h5>PhoneNumber</h5></th>
-                    <th scope="col-sm-4"><h5>E-mail</h5></th>
-                    <th scope="col-sm-4"><h5>Operation</h5></th>
-                  </tr>
-                  </thead>
-                  <!--
-                  <tbody *ngFor = "let user of userList">
-                  <tr>
-                    <td><h5>{{user.id}}</h5></td>
-                    <td><h5>{{user.first_name + ' ' + user.last_name }}</h5></td>
-                    <td><h5>{{user.phone}}</h5></td>
-                    <td><h5>{{user.email}}</h5></td>
-                    <td><h5><button class="btn btn-success" (click)="showUserDetail(user)">Detail</button></h5></td>
-                  </tr>
-                  </tbody>-->
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

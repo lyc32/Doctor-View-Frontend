@@ -4,22 +4,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { DoctorAppointments } from "./view/doctor-Appointments/doctor-Appointments";
+import { DoctorDashboard } from "./view/doctor-Dashboard/doctor-Dashboard";
 import { AccountInfoComponent } from './view/account-info/account-info.component';
 import { LoginComponent } from './view/login/login.component';
 import { SigninComponent } from './view/signin/signin.component';
 import { MessageComponent } from './view/message/message.component';
+import { SearchAppointmentComponent } from './view/search-appointment/search-appointment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
 
-    DoctorAppointments,
+    DoctorDashboard,
     AccountInfoComponent,
 
     LoginComponent,
     SigninComponent,
-    MessageComponent
+    MessageComponent,
+    SearchAppointmentComponent
   ],
   imports: [
     BrowserModule,

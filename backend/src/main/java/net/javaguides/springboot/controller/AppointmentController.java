@@ -23,27 +23,47 @@ import net.javaguides.springboot.repository.AppointmentRepository;
 @RestController
 @RequestMapping("/api/v1/")
 public class AppointmentController {
-		 @Autowired
-		private AppointmentRepository appointmentRepository;
-		
-		
-		@GetMapping("/appointments")
-		public List<Appointment> getAllAppointment(){
-			return appointmentRepository.findAll();
+	@Autowired
+	private AppointmentRepository appointmentRepository;
+
+
+	@GetMapping("/appointments")
+	public List<Appointment> getAllAppointment(){
+		return appointmentRepository.findAll();
+	}
+	@GetMapping("/appointments/date/{date}")
+	public List<Appointment> getAllAppointmentByDate(@PathVariable String date){
+		return appointmentRepository.findByDate(date);
+	}
+		@GetMapping("/appointments/person/{person_id}")
+		public List<Appointment> getAllAppointmentByPersonId(@PathVariable Long person_id){
+			return appointmentRepository.findByPersonId(person_id);
+		}	
+		@GetMapping("/appointments/person/date/{person_id}/{date}")
+		public List<Appointment> getAllAppointmentByPersonIdAndDate(@PathVariable Long person_id,@PathVariable String date){
+			return appointmentRepository.findByPersonIdAndDate(person_id, date);
 		}
-		@GetMapping("/appointments/{date}")
-		public List<Appointment> getAllAppointmentByDate(@PathVariable String date){
-			return appointmentRepository.findByDate(date);
+		@GetMapping("/appointments/person/doctor/{personId}/{doctorId}")
+		public List<Appointment> getAllAppointmentByPersonIdAndDoctorId(@PathVariable Long personId,@PathVariable Long doctorId){
+			return appointmentRepository.findByPersonIdAndDoctorId(personId, doctorId);
+		}
+		@GetMapping("/appointments/doctor/{doctorId}")
+		public List<Appointment> getAllAppointmentByDoctorId(@PathVariable Long doctorId){
+			return appointmentRepository.findByDoctorId(doctorId);
+		}
+		@GetMapping("/appointments/doctor/date/{doctor_Id}/{date}")
+		public List<Appointment> getAllAppointmentByDoctorIdAndDate(@PathVariable Long doctor_Id, @PathVariable String date){
+			return appointmentRepository.findByDoctorIdAndDate(doctor_Id, date);
 		}
 		
 		
-		@PostMapping("/appintments")
+		@PostMapping("/appointments")
 		public Appointment createAppointment(@RequestBody Appointment appointment) {
 			return appointmentRepository.save(appointment);
 		}
 		
 		
-		@GetMapping("/appintments/{id}")
+		@GetMapping("/appointments/appointment/{id}")
 		public ResponseEntity<Appointment> getAppointmentById(@PathVariable Long id) {
 			Appointment appointment = appointmentRepository.findById(id)
 					.orElseThrow(() -> new ResourceNotFoundException("Appointment not exist with id :" + id));
@@ -52,14 +72,14 @@ public class AppointmentController {
 		
 		 
 		
-		@PutMapping("/appintments/{id}")
+		@PutMapping("/appointments/{id}")
 		public ResponseEntity<Appointment> updateAppointment(@PathVariable Long id, @RequestBody Appointment appointmentDetails){
 			Appointment appointment = appointmentRepository.findById(id)
 					.orElseThrow(() -> new ResourceNotFoundException("Appointment not exist with id :" + id));
-			appointment.setDoctor_id(appointmentDetails.getDoctor_id());
+			appointment.setDoctorId(appointmentDetails.getDoctorId());
 			appointment.setDoctor_name(appointmentDetails.getDoctor_name());
 			appointment.setFee(appointmentDetails.getFee());
-			appointment.setPerson_id(appointmentDetails.getPerson_id());
+			appointment.setPersonId(appointmentDetails.getPersonId());
 			appointment.setPerson_name(appointmentDetails.getPerson_name());
 			
 			appointment.setTime(appointmentDetails.getTime());
@@ -79,6 +99,7 @@ public class AppointmentController {
 			appointmentRepository.delete(appointment);
 			return "deleted";
 		}
+		
 		
 		
 	

@@ -1,34 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {Appointment} from "../../model/appointment";
+import {AppointmentService} from "../../service/appointment-service";
+import {Account} from "../../model/account";
 
 @Component({
   selector: 'app-doctor-home',
-  templateUrl: './doctor-Appointments.html',
-  styleUrls: ['./doctor-Appointments.css'],
+  templateUrl: './doctor-Dashboard.html',
+  styleUrls: ['./doctor-Dashboard.css'],
 })
-export class DoctorAppointments implements OnInit
+export class DoctorDashboard implements OnInit
 {
 
   mouthList:string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   dayList:number[] = [31,28,31,30,31,30,31,31,30,31,30,31];
-
 
   year:number = -1;
   mouth:string = "";
   mouthIndex:number = -1;
   days:number[] = [];
   emptyDays:string[] = [];
-  date:number = -1
+  date:number = -1;
+  currentDate:number = -1;
   prev:string = "";
   next:string = "";
-
 
   currentSecords:number = -1
   currentMinutes:number = -1;
   currentHours:number = -1;
-
   currentTime: Date = new Date();
-  currentDate: Date = new Date();
+
+  user:Account = new Account();
+  appointmentList:Appointment[] = [];
+  currentAppointment:Appointment = new Appointment();
 
   ngOnInit()
   {
@@ -36,11 +40,11 @@ export class DoctorAppointments implements OnInit
     let inputDate = this.router.snapshot.params['date'];
     if(inputDate != 'today')
     {
+      this.currentDate = inputDate;
       this.year = (parseInt(inputDate) - parseInt(inputDate) % 10000) / 10000;
       this.date = (parseInt(inputDate) - this.year*10000) % 100;
       this.mouthIndex = ((parseInt(inputDate) - this.year*10000) - this.date)/100;
       this.mouth = this.mouthList[this.mouthIndex -1];
-
       if(this.LeapYear(this.year) && this.mouth == "February")
       {
         this.days = Array(29).fill(1).map((x,i)=> (i+1) );
@@ -58,6 +62,7 @@ export class DoctorAppointments implements OnInit
       this.date = new Date().getDate();
       this.mouthIndex = new Date().getMonth() + 1;
       this.mouth = this.mouthList[this.mouthIndex -1];
+      this.currentDate = this.year*10000 + this.mouthIndex * 100 + this.date;
       if(this.LeapYear(this.year) && this.mouth == "February")
       {
         this.days = Array(29).fill(1).map((x,i)=> (i+1) );
@@ -85,15 +90,44 @@ export class DoctorAppointments implements OnInit
       this.next = "/doctor/appointment/" + ((this.year+1)*10000+100+this.date);
     }
 
+    // @ts-ignore
+    this.user = JSON.parse(window.sessionStorage.getItem('healthCenterUser'));
+
+    if(this.user != null)
+    {
+      this.appointmentService.getAppointmentsByDoctorIDAndDate(this.user.id, this.currentDate)
+        .subscribe(
+          (data)=>
+          {
+            this.appointmentList = Array(8);
+            for (let i=0; i<this.appointmentList.length; i++)
+            {
+              this.appointmentList[i] = new Appointment()
+              this.appointmentList[i].time = (i + 9) * 100;
+            }
+            console.log(this.appointmentList)
+            for (let i=0; i<data.length; i++)
+            {
+              this.appointmentList[data[i].time / 100 - 9] = data[i];
+            }
+            console.log(this.appointmentList)
+          });
+    }
+
     setInterval
     (() => {
       this.setSecondPointerPosition()
     }, 1000);
   }
 
-  constructor(private router:ActivatedRoute)
+  constructor(private router:ActivatedRoute, private appointmentService:AppointmentService)
   {
 
+  }
+
+  showAppointmentDetail(app:Appointment)
+  {
+    this.currentAppointment = app;
   }
 
   setSecondPointerPosition()

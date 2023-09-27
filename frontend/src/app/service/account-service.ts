@@ -36,7 +36,17 @@ export class AccountService
       id: id,
       phone: phone
     }
-    return this.httpClient.put<Account>('/update', JSON.stringify(info), {headers: httpHeaders });
+    return this.httpClient.put<Account>(this.baseURL + id, JSON.stringify(info), {headers: httpHeaders });
+  }
+
+  updateEmail(id:number, email:string):Observable<Account>
+  {
+    const httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    const info = {
+      id: id,
+      emailId: email
+    }
+    return this.httpClient.put<Account>(this.baseURL + id, JSON.stringify(info), {headers: httpHeaders });
   }
 
   resetPassword(id:number, password:string):Observable<Account>
@@ -46,7 +56,7 @@ export class AccountService
       id: id,
       password: password
     }
-    return this.httpClient.put<Account>( '/update', JSON.stringify(info), {headers: httpHeaders });
+    return this.httpClient.put<Account>( this.baseURL + id, JSON.stringify(info), {headers: httpHeaders });
   }
 
 

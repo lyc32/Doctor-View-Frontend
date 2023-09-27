@@ -28,11 +28,20 @@ export class MessageComponent implements OnInit
       this.message = 'Welcome Back ' + doctor.firstName + " " + doctor.lastName;
       this.targetPage = "Doctor/Home";
     }
-
-    if(this.router.snapshot.params['message'] == 'logOutSuccessful')
+    else if(this.router.snapshot.params['message'] == 'logOutSuccessful')
     {
       this.message = 'You Are Already Log Out';
       this.targetPage = "LogIn";
+    }
+    else if(this.router.snapshot.params['message'] == 'updateSuccessful')
+    {
+      this.message = 'Your Account Info Has Already Update';
+      this.targetPage = document.referrer;
+    }
+    else
+    {
+      this.message = 'Error: ' + this.router.snapshot.params['message'];
+      this.targetPage = document.referrer;
     }
 
 
